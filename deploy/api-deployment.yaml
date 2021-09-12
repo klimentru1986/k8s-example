@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: api-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      component: web
+      component: api
   template:
     metadata:
       labels:
-        component: web
+        component: api
     spec:
       containers:
-      - name: client
-        image: klimentru1986/kubernatestodo-client
+      - name: api
+        image: klimentru1986/kubernatestodo-api
         ports:
-        - containerPort: 80
+        - containerPort: 8000
