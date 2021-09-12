@@ -13,7 +13,7 @@ spec:
         component: web
     spec:
       containers:
-      - name: client
-        image: klimentru1986/kubernatestodo-client
-        ports:
-        - containerPort: 80
+        - name: client
+          image: klimentru1986/kubernatestodo-client
+          ports:
+            - containerPort: 80

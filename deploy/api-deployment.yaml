@@ -13,7 +13,7 @@ spec:
         component: api
     spec:
       containers:
-      - name: api
-        image: klimentru1986/kubernatestodo-api
-        ports:
-        - containerPort: 8000
+        - name: api
+          image: klimentru1986/kubernatestodo-api
+          ports:
+            - containerPort: 8000

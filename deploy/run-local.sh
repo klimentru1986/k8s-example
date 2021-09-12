@@ -1,16 +1,22 @@
-# Конфигурирование клиентского приложения
+
+# database config
+kubectl apply -f postgres-cluster-ip-service.yaml
+kubectl apply -f postgres-deployment.yaml
+
+# frontend config
 kubectl apply -f client-cluster-ip-service.yaml
 kubectl apply -f client-deployment.yaml
 
-# Конфигурирование приложения АПИ
+# backend config
 kubectl apply -f api-cluster-ip-service.yaml
 kubectl apply -f api-deployment.yaml
 
-# Получение списка подов и сервисов
+# avaliable services
 kubectl get pods
 kubectl get services
 
-# Детальная инфонмация о текущем поде
+# deployment details
+kubectl describe deployment postgres-deployment
 kubectl describe deployment client-deployment
 kubectl describe deployment api-deployment
 
