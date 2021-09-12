@@ -1,5 +1,6 @@
 
 # database config
+kubectl apply -f database-persistent-volume-claim.yaml
 kubectl apply -f postgres-cluster-ip-service.yaml
 kubectl apply -f postgres-deployment.yaml
 
