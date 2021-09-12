@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 services:
   kubernatestodo:
@@ -8,3 +8,17 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8000:8000
+  db:
+    image: postgres:13.2
+    restart: unless-stopped
+    container_name: postgres
+    env_file:
+      - .env
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres-data:
