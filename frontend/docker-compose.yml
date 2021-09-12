@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: klimentru1986/kubernatestodo-client
+    ports: 
+      - "3000:80"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
