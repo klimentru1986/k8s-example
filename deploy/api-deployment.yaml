@@ -17,3 +17,26 @@ spec:
           image: klimentru1986/kubernatestodo-api
           ports:
             - containerPort: 8000
+          env:
+            - name: DEBUG
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: todo-secret
+                  key: API_SECRET
+            - name: DB_ENGINE
+              value: "django.db.backends.postgresql_psycopg2"
+            - name: DB_NAME
+              value: "todo"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: todo-secret
+                  key: DB_PASSWORD
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: DB_PORT
+              value: "5432"
