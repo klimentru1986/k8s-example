@@ -8,6 +8,7 @@ env:
   global:
     # Do not prompt for user input when using any SDK methods.
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+    - GIT_SHA=$(git rev-parse HEAD)
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
@@ -33,9 +34,10 @@ jobs:
         - gcloud version
         - gcloud components update kubectl
         - gcloud auth activate-service-account --key-file service-account.json
-        - gcloud config set project bustling-bot-327005
-        - gcloud config set compute/zone europe-north1-a
-        - gcloud container clusters get-credentials k8s-exmapmle-cluster
+        - gcloud projects list
+        - gcloud config set project k8s-example-327016
+        - gcloud config set compute/zone europe-north1-b
+        - gcloud container clusters get-credentials  k8-example
       deploy:
         provider: script
         script: bash ./deploy/deploy.sh
