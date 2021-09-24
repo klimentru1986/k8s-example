@@ -13,3 +13,13 @@ before_install:
   - gcloud version
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
+  - gcloud config set project bustling-bot-327005
+  - gcloud config set compute/zone europe-north1-a	
+  - gcloud container clusters get-credentials k8s-exmapmle-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build --target builder -t kliment1986/client-test:latest ./frontend/.
+  - docker build -t kliment1986/api-test:latest ./backend/. 
+
+script:
+  - docker run -e CI=true kliment1986/client-test:latest npm run test
+  - docker run --env-file ./backend/tst.env kliment1986/api-test:latest python manage.py test
