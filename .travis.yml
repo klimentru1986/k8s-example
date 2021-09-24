@@ -4,6 +4,10 @@ cache:
     - "$HOME/google-cloud-sdk/"
 services:
   - docker
+env:
+  global:
+    # Do not prompt for user input when using any SDK methods.
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   - gcloud version || true
@@ -14,11 +18,11 @@ before_install:
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project bustling-bot-327005
-  - gcloud config set compute/zone europe-north1-a	
+  - gcloud config set compute/zone europe-north1-a
   - gcloud container clusters get-credentials k8s-exmapmle-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build --target builder -t kliment1986/client-test:latest ./frontend/.
-  - docker build -t kliment1986/api-test:latest ./backend/. 
+  - docker build -t kliment1986/api-test:latest ./backend/.
 
 script:
   - docker run -e CI=true kliment1986/client-test:latest npm run test
