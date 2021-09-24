@@ -24,6 +24,9 @@ before_install:
   - docker build --target builder -t kliment1986/client-test:latest ./frontend/.
   - docker build -t kliment1986/api-test:latest ./backend/.
 
-script:
-  - docker run -e CI=true kliment1986/client-test:latest npm run test
-  - docker run --env-file ./backend/tst.env kliment1986/api-test:latest python manage.py test
+jobs:
+  include:
+    - stage: tests
+      script: docker run -e CI=true kliment1986/client-test:latest npm run test
+    - stage: tests
+      script: docker run --env-file ./backend/tst.env kliment1986/api-test:latest python manage.py test
