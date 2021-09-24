@@ -1,16 +1,16 @@
 
 # database config
-kubectl apply -f database-persistent-volume-claim.yaml
-kubectl apply -f postgres-cluster-ip-service.yaml
-kubectl apply -f postgres-deployment.yaml
+kubectl apply -f ./k8s/database-persistent-volume-claim.yaml
+kubectl apply -f ./k8s/postgres-cluster-ip-service.yaml
+kubectl apply -f ./k8s/postgres-deployment.yaml
 
 # frontend config
-kubectl apply -f client-cluster-ip-service.yaml
-kubectl apply -f client-deployment.yaml
+kubectl apply -f ./k8s/client-cluster-ip-service.yaml
+kubectl apply -f ./k8s/client-deployment.yaml
 
 # backend config
-kubectl apply -f api-cluster-ip-service.yaml
-kubectl apply -f api-deployment.yaml
+kubectl apply -f ./k8s/api-cluster-ip-service.yaml
+kubectl apply -f ./k8s/api-deployment.yaml
 
 # avaliable services
 kubectl get pods

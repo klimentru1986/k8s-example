@@ -36,3 +36,9 @@ jobs:
         - gcloud config set project bustling-bot-327005
         - gcloud config set compute/zone europe-north1-a
         - gcloud container clusters get-credentials k8s-exmapmle-cluster
+
+deploy:
+  provider: script
+  script: bash ./deploy/deploy.sh
+  on:
+    branch: main
