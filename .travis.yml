@@ -18,11 +18,13 @@ jobs:
       script:
         - docker build --target builder -t kliment1986/client-test:latest ./frontend/.
         - docker run -e CI=true kliment1986/client-test:latest npm run test
+      if: type = pull_request
 
     - stage: tests
       script:
         - docker build -t kliment1986/api-test:latest ./backend/.
         - docker run --env-file ./backend/tst.env kliment1986/api-test:latest python manage.py test
+      if: type = pull_request
 
     - stage: gcloud deploy
       script:
