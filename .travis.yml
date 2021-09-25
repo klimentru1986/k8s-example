@@ -36,10 +36,10 @@ jobs:
         - gcloud auth activate-service-account --key-file service-account.json
         - gcloud projects list
         - gcloud config set project k8s-example-327016
-        - gcloud config set compute/zone europe-north1-b
+        - gcloud config set compute/region europe-north1-b
         - gcloud container clusters get-credentials  k8-example
       deploy:
         provider: script
         script: bash ./deploy/deploy.sh
       on:
-        branch: main
+        branches: main
