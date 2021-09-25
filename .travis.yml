@@ -41,5 +41,5 @@ jobs:
       deploy:
         provider: script
         script: bash ./deploy/deploy.sh
-      on:
-        branches: main
+        on:
+          branches: main
