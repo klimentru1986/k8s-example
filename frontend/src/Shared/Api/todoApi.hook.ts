@@ -3,7 +3,7 @@ import useFetch from "use-http";
 import { TodoModel } from "../Models/TodoModel";
 
 export const useTodoApi = () => {
-  const { get, post, response } = useFetch<TodoModel>("/api/todos");
+  const { get, post, del, response } = useFetch<TodoModel>("/api/todos");
 
   const getList = useCallback(async (): Promise<TodoModel[] | undefined> => {
     const todos = await get("/");
@@ -25,8 +25,16 @@ export const useTodoApi = () => {
     [post, response]
   );
 
+  const deleteTodo = useCallback(
+    async (id): Promise<void> => {
+      await del(`/${id}`);
+    },
+    [del]
+  );
+
   return {
     getList,
     addTodo,
+    deleteTodo,
   };
 };

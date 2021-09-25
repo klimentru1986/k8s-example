@@ -7,6 +7,15 @@
   text-align: center;
 }
 
+.TodoList .list {
+  padding: 0 10px;
+}
+
+.TodoList .list-icon {
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
 .AddTodo {
   width: 100%;
   display: grid;
