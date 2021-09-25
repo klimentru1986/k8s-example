@@ -1,15 +1,15 @@
-import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
-import { useTodoApi } from "../../Shared/Api/todo-api.hook";
+import { List } from "@mui/material";
+import { FC, useCallback, useEffect, useState } from "react";
+import { useTodoApi } from "../../Shared/Api/todoApi.hook";
 import { TodoModel } from "../../Shared/Models/TodoModel";
 
-import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
-import { green } from "@material-ui/core/colors";
+import { AddTodo } from "./components/AddTodo";
+import { TodoItem } from "./components/TodoItem";
 
-export const TodoList = () => {
-  const [dense, setDense] = useState(false);
+export const TodoList: FC = () => {
+  const [dense] = useState(false);
   const [todos, setTodos] = useState<TodoModel[]>([]);
-  const { getList } = useTodoApi();
+  const { getList, addTodo, deleteTodo, updateTodo } = useTodoApi();
 
   const initializeTodos = useCallback(async () => {
     const todos = await getList();
@@ -18,9 +18,22 @@ export const TodoList = () => {
     }
   }, [getList]);
 
-  const getIconStyles = useCallback(
-    (t: TodoModel) => (t.completed ? { color: green[500] } : {}),
-    []
+  const onAddTodo = useCallback(
+    async (val) => {
+      const todo = await addTodo(val);
+      if (todo) {
+        setTodos((prev) => [todo, ...prev]);
+      }
+    },
+    [addTodo, setTodos]
+  );
+
+  const onDeleteTodo = useCallback(
+    async (id) => {
+      await deleteTodo(id);
+      setTodos((prev) => prev.filter((t) => t.id !== id));
+    },
+    [deleteTodo, setTodos]
   );
 
   useEffect(() => {
@@ -30,14 +43,15 @@ export const TodoList = () => {
   return (
     <div className="TodoList">
       <h1 className="title">Tasks</h1>
-      <List dense={dense}>
+      <AddTodo addTodo={onAddTodo} />
+      <List className="list" dense={dense}>
         {todos.map((t, i) => (
-          <ListItem>
-            <ListItemText primary={t.title} />
-            <ListItemIcon>
-              <DoneOutlineTwoToneIcon style={getIconStyles(t)} />
-            </ListItemIcon>
-          </ListItem>
+          <TodoItem
+            key={i}
+            todo={t}
+            onDelete={onDeleteTodo}
+            onUpdate={updateTodo}
+          />
         ))}
       </List>
     </div>
