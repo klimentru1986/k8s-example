@@ -1,5 +1,5 @@
-docker build -t klimentru1986/kubernatestodo-client:latest -t klimentru1986/kubernatestodo-client:$GIT_SHA ../frontend/.
-docker build -t klimentru1986/kubernatestodo-api:latest -t klimentru1986/kubernatestodo-api:$GIT_SHA ../backend/.
+docker build -t klimentru1986/kubernatestodo-client:latest -t klimentru1986/kubernatestodo-client:$GIT_SHA ./frontend/.
+docker build -t klimentru1986/kubernatestodo-api:latest -t klimentru1986/kubernatestodo-api:$GIT_SHA ./backend/.
 
 docker push klimentru1986/kubernatestodo-client
 docker push klimentru1986/kubernatestodo-api
