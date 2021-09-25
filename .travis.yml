@@ -27,7 +27,7 @@ jobs:
         - docker run --env-file ./backend/tst.env kliment1986/api-test:latest python manage.py test
 
     - stage: gcloud deploy
-      if: branch = main
+      if: branch = main AND type = push
       script:
         - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
         - gcloud version || true
@@ -41,7 +41,7 @@ jobs:
         - gcloud config set project k8s-example-327016
         - gcloud config set compute/region europe-north1-b
         - gcloud container clusters get-credentials  k8-example
-      
+
       deploy:
         - provider: script
           script: bash ./deploy/deploy.sh
