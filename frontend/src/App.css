@@ -6,3 +6,10 @@
 .TodoList .title {
   text-align: center;
 }
+
+.AddTodo {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  gap: 10px;
+}
