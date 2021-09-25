@@ -1,11 +1,10 @@
-import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { List } from "@mui/material";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useTodoApi } from "../../Shared/Api/todo-api.hook";
 import { TodoModel } from "../../Shared/Models/TodoModel";
 
-import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
-import { green } from "@material-ui/core/colors";
 import { AddTodo } from "./components/AddTodo";
+import { TodoItem } from "./components/TodoItem";
 
 export const TodoList: FC = () => {
   const [dense] = useState(false);
@@ -18,11 +17,6 @@ export const TodoList: FC = () => {
       setTodos(todos);
     }
   }, [getList]);
-
-  const getIconStyles = useCallback(
-    (t: TodoModel) => (t.completed ? { color: green[500] } : {}),
-    []
-  );
 
   const onAddTodo = useCallback(
     async (val) => {
@@ -44,12 +38,7 @@ export const TodoList: FC = () => {
       <AddTodo addTodo={onAddTodo} />
       <List dense={dense}>
         {todos.map((t, i) => (
-          <ListItem>
-            <ListItemText primary={t.title} />
-            <ListItemIcon>
-              <DoneOutlineTwoToneIcon style={getIconStyles(t)} />
-            </ListItemIcon>
-          </ListItem>
+          <TodoItem key={i} todo={t} />
         ))}
       </List>
     </div>
