@@ -37,7 +37,7 @@ export const useTodoApi = () => {
 
   const deleteTodo = useCallback(
     async (id): Promise<void> => {
-      await del(`/${id}`);
+      await del(`/${id}/`);
     },
     [del]
   );
