@@ -9,7 +9,7 @@ import { TodoItem } from "./components/TodoItem";
 export const TodoList: FC = () => {
   const [dense] = useState(false);
   const [todos, setTodos] = useState<TodoModel[]>([]);
-  const { getList, addTodo, deleteTodo } = useTodoApi();
+  const { getList, addTodo, deleteTodo, updateTodo } = useTodoApi();
 
   const initializeTodos = useCallback(async () => {
     const todos = await getList();
@@ -46,7 +46,12 @@ export const TodoList: FC = () => {
       <AddTodo addTodo={onAddTodo} />
       <List className="list" dense={dense}>
         {todos.map((t, i) => (
-          <TodoItem key={i} todo={t} onDelete={onDeleteTodo} />
+          <TodoItem
+            key={i}
+            todo={t}
+            onDelete={onDeleteTodo}
+            onUpdate={updateTodo}
+          />
         ))}
       </List>
     </div>
