@@ -39,7 +39,7 @@ jobs:
         - gcloud config set compute/region europe-north1-b
         - gcloud container clusters get-credentials  k8-example
       deploy:
-        provider: script
-        script: bash ./deploy/deploy.sh
-        on:
-          branches: main
+        - provider: script
+          script: bash ./deploy/deploy.sh
+          on:
+            branch: main
