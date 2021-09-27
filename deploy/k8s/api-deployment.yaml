@@ -25,6 +25,11 @@ spec:
                 secretKeyRef:
                   name: todo-secret
                   key: API_SECRET
+            - name: SERVER_IP
+              valueFrom:
+                secretKeyRef:
+                  name: todo-secret
+                  key: SERVER_IP
             - name: DB_ENGINE
               value: "django.db.backends.postgresql_psycopg2"
             - name: DB_NAME
